@@ -9,8 +9,9 @@ for i in initial_guests:
     guests.write(i + "\n")
     
 guests.close()
+```
 No output is generated for the above code cell. To check the contents of the newly created guests.txt file, run the following code.
-
+``` python
 with open("guests.txt") as guests:
     for line in guests:
         print(line)
@@ -28,6 +29,7 @@ Khalid
 The output shows that our guests.txt file is correctly populated with each initial guest's first name on its own line. Cool!
 
 Now suppose we want to update our file as guests check in and out. Fill in the missing code in the following cell to add guests to the guests.txt file as they check in.
+
 
 ``` python
 new_guests = ["Sam", "Danielle", "Jacob"]
