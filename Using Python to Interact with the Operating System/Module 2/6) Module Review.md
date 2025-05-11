@@ -28,26 +28,23 @@ print(parse_sentences("Hello! How are you doing?")) # should return ['Hello!', '
 print(parse_sentences("what a beautiful day it is")) # should return ['what', 'a', 'beautiful', 'day', 'it', 'is']
 print(parse_sentences("2 + 2 is definitely 4!")) # should return ['2', '+', '2', 'is', 'definitely', '4!']
 ```
-3. International Standard Book Numbers (ISBNs) are used to uniquely identify published books. They follow a 13-digit format: 
+3. A company uses Product ID numbers to identify each product line it makes. Each product ID starts with 4 digits, followed by a hyphen (-), followed by two capital letters, followed by a hyphen (-), followed by two more digits, in the format: 
 
-XXX-X-XX-XXXXXX-X
+1234-AB-12 
 
-where each X represents one numeric digit. You have a list of books, information about those books, and their ISBN numbers. You want to extract the 6 digits of the ISBN that come before the last hyphen of each book’s ISBN number. However, you need to be careful to avoid 6-digit strings that are not part of the ISBN numbers you’re interested in. 
-
-Complete the find_isbn() function so you can use it to extract the 6-digit portion of the ISBN numbers of the books on your list. 
+The manufacturing team records information about the production of each product line daily. You want to extract the product ID numbers of one of these product lines, which begins with a 1. The other characters in the product ID can be any digit or variable, as long as they follow the product ID format described above. Complete the following code so the find_productID() function returns all product ID numbers that match the product of interest. 
 
 ```python
-def find_isbn(text):
-    pattern = r"\b\d{3}-\d-\d{2}-(\d{6})-\d\b"
-    result = re.search(pattern, text)
-    if result is None:
-        return ""
-    return result.group(1)  # Returning the correct capturing group
 
+def find_productID(report):
+    pattern = r"\b1\d{3}-[A-Z]{2}-\d{2}\b"
+    result = re.findall(pattern, report)
+    return result
 
-
-print(find_isbn("123-4-12-098754-0")) # Should return 098754
-print(find_isbn("223094-AB-30")) # result should be blank
-print(find_isbn("1123-4-12-098754-0")) # result should be blank
+# Test Cases
+print(find_productID("Products 1234-AB-30 and 2234-AB-30, not items 12-AB-30 or 12345-AB-30"))  
+# Should return ['1234-AB-30']
+print(find_productID("Products of interest are 1234-AB-30, 1678-XZ-11, and 1561-CD-57. We're not interested in other products like 2345-AB-29."))  
+# Should return ['1234-AB-30', '1678-XZ-11', '1561-CD-57']
 ```
 
